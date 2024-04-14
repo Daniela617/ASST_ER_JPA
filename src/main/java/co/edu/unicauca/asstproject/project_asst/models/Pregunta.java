@@ -7,14 +7,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Inheritance(strategy = InheritanceType.JOINED)
+@Getter @Setter @AllArgsConstructor 
 public class Pregunta {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +31,13 @@ public class Pregunta {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objPregunta")
     private List<Respuesta> respuestas;
 
-    public Pregunta(){
+    @ManyToOne
+    @JoinColumn(name="",nullable = false)
+    private TipoPregunta objTipoPregunta;
+
+    //TODO
+    public Pregunta(Integer idpregunta){
+        this.idpregunta= idpregunta;
         this.respuestas = new ArrayList<Respuesta>();
     }
 
