@@ -25,17 +25,14 @@ public class Telefono {
 
     private String numero;
 
-    @OneToOne(cascade = {CascadeType.PERSIST })
-	@JoinColumn(name = "idDocente",referencedColumnName = "id")
-    private Docente objDocente;
+    @OneToOne(mappedBy = "objTelefono")
+    private Persona objDocente;
 
-
-
-    public Docente getObjDocente()
+    public Persona getObjDocente()
     {
         return objDocente;
     }
-    public void setObjDocente(Docente objDocente){
+    public void setObjDocente(Persona objDocente){
         this.objDocente=objDocente;
     }
 }

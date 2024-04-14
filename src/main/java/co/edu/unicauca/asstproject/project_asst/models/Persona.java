@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Persona {
+public abstract class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idpersona;
@@ -26,7 +26,10 @@ public class Persona {
     private String nombres;
     private String apellidos;
 
-    public Persona(int idpersona){
-        this.idpersona=idpersona;
+    public Persona(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos){
+        this.tipoidentificacion = tipoidentificacion;
+        this.numeroidentificacion = numeroidentificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
     }
 }
