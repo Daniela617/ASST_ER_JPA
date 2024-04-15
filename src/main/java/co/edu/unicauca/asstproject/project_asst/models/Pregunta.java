@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ import lombok.Setter;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter @AllArgsConstructor 
+@Table(name = "Preguntas")
 public class Pregunta {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,12 +34,15 @@ public class Pregunta {
     private List<Respuesta> respuestas;
 
     @ManyToOne
-    @JoinColumn(name="",nullable = false)
+    @JoinColumn(name="idtipopregunta",nullable = false)
     private TipoPregunta objTipoPregunta;
 
+    @ManyToOne
+    @JoinColumn(name = "idCuestionario",nullable = false)
+    private Cuestionario objCuestionario;
+
     //TODO
-    public Pregunta(Integer idpregunta){
-        this.idpregunta= idpregunta;
+    public Pregunta(){
         this.respuestas = new ArrayList<Respuesta>();
     }
 

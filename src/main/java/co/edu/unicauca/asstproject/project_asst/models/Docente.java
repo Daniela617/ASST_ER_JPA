@@ -7,6 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,8 +32,15 @@ public class Docente extends Persona{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objDocente")
     private List<Respuesta> respuestas;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "Departamentos-Docentes",
+                joinColumns = @JoinColumn(name = "idpersona"),
+                inverseJoinColumns = @JoinColumn(name = "idDepartamento"))
+    private List<Departamento> departamentos;
+
     public Docente(){
         this.respuestas = new ArrayList<Respuesta>();
+        this.departamentos = new ArrayList<Departamento>();
     }
 
     public Docente (String tipoidentificacion, String numeroidentificacion, 
