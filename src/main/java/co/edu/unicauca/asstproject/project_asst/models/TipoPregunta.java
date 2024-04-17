@@ -8,10 +8,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 
 import lombok.Getter;
 import lombok.Setter;
-
+//TODO EXTENDS?
 @Setter
 @Getter
 @Entity
@@ -20,9 +21,17 @@ public class TipoPregunta {
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idtippregunta;
+
+    @Column(length = 30)
     private String nombre;
+
+    @Column(length = 30)
     private String descripcion;
 
+    /*
+     * Siempre que se consulte un tipo de pregunta se cargan sus preguntas
+     * CARGA SE PRODUCE EN EL ACTO
+     */
     @OneToMany( fetch = FetchType.EAGER, mappedBy = "objTipoPregunta")
     private List<Pregunta> preguntas;
 

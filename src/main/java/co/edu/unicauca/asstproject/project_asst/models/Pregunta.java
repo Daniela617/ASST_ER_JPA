@@ -30,6 +30,8 @@ public class Pregunta {
     @Column(length = 30)
     private String enunciado; 
 
+    //EAGER: siempre que se consulte una pregunta se cargan sus respuestas
+    //CARGA SE PRODUCE EN EL ACTO
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objPregunta")
     private List<Respuesta> respuestas;
 

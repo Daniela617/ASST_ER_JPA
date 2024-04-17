@@ -27,7 +27,7 @@ public class Cuestionario {
     private String titulo;
     @Column(nullable = false, length = 30)
     private String descripcion;
-
+    //CARGA SE PRODUCE EN EL ACTO
     @OneToMany(fetch =  FetchType.EAGER, mappedBy = "objCuestionario")
     private List<Pregunta> preguntas;
 

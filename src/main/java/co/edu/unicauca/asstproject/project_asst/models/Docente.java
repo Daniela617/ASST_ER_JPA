@@ -6,10 +6,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,12 +26,16 @@ public class Docente extends Persona{
     @Column(length = 30)
     private String vinculacion; 
     
-    @OneToOne
-    @JoinColumn(name = "idtelefono")
+    
+    @OneToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "objDocente")
+    @PrimaryKeyJoinColumn
     private Telefono objTelefono;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objDocente")
     private List<Respuesta> respuestas;
+
+    //TODO QUESTION EAGER-    
+    //CARGA SE PRODUCE EN EL ACTO
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Departamentos-Docentes",
