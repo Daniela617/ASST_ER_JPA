@@ -22,7 +22,7 @@ import lombok.Setter;
 @Table(name = "Personas")
 public abstract class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpersona;
 
     @Column(length = 30)

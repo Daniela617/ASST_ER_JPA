@@ -31,13 +31,13 @@ public class Docente extends Persona{
     @PrimaryKeyJoinColumn
     private Telefono objTelefono;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objDocente")
+    @OneToMany( mappedBy = "objDocente")
     private List<Respuesta> respuestas;
 
     //TODO QUESTION EAGER-    
     //CARGA SE PRODUCE EN EL ACTO
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinTable(name = "Departamentos-Docentes",
                 joinColumns = @JoinColumn(name = "idpersona"),
                 inverseJoinColumns = @JoinColumn(name = "idDepartamento"))

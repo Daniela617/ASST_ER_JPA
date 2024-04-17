@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 @Setter
@@ -29,7 +28,7 @@ public class Telefono {
     @Column(length = 30)
     private String numero;
     /*TODO */
-    @OneToOne(cascade = {CascadeType.PERSIST })
+    @OneToOne
     @JoinColumn(name = "idpersona",referencedColumnName = "idpersona")
     private Persona objDocente;
 

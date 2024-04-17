@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
@@ -27,8 +28,8 @@ public class Cuestionario {
     private String titulo;
     @Column(nullable = false, length = 30)
     private String descripcion;
-    //CARGA SE PRODUCE EN EL ACTO
-    @OneToMany(fetch =  FetchType.EAGER, mappedBy = "objCuestionario")
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY, mappedBy = "objCuestionario")
     private List<Pregunta> preguntas;
 
 

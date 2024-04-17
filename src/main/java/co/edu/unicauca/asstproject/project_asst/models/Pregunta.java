@@ -11,8 +11,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -32,10 +34,10 @@ public class Pregunta {
 
     //EAGER: siempre que se consulte una pregunta se cargan sus respuestas
     //CARGA SE PRODUCE EN EL ACTO
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objPregunta")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "objPregunta")
     private List<Respuesta> respuestas;
-
-    @ManyToOne
+    //TODO 
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objPregunta")
     @JoinColumn(name="idtipopregunta",nullable = false)
     private TipoPregunta objTipoPregunta;
 
