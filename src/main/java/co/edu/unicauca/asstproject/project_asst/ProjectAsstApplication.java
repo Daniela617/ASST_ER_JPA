@@ -1,12 +1,13 @@
 package co.edu.unicauca.asstproject.project_asst;
 
 import javax.transaction.Transactional;
-
+import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import co.edu.unicauca.asstproject.project_asst.models.Cuestionario;
 import co.edu.unicauca.asstproject.project_asst.repositories.CuestionarioRepository;
 import co.edu.unicauca.asstproject.project_asst.repositories.DepartamentoRepository;
 import co.edu.unicauca.asstproject.project_asst.repositories.DocenteRepository;
@@ -19,7 +20,7 @@ import co.edu.unicauca.asstproject.project_asst.repositories.TipoPreguntaReposit
 @SpringBootApplication
 @Transactional
 public class ProjectAsstApplication implements CommandLineRunner{
-
+	Scanner sc = new Scanner(System.in);
 	@Autowired
 	private CuestionarioRepository srvCuestionariosBD;
 
@@ -73,8 +74,23 @@ public class ProjectAsstApplication implements CommandLineRunner{
 		throw new UnsupportedOperationException("Unimplemented method 'registrarDocente'");
 	}
 	private void crearCuestionario() {
+		System.out.println("Crear cuestionario:");
+		Cuestionario objCuestionario = new Cuestionario();
+		System.out.println("Ingrese el titulo:");
+		String titulo = sc.nextLine();
+		objCuestionario.setTitulo(titulo);
+		System.out.println("Ingrese la descripcion:");
+		String desc = sc.nextLine();
+		objCuestionario.setDescripcion(desc);
+		System.out.println("Ingrese la cantidad de preguntas pertenecientes al cuestionario");
+		int cantPreguntas = sc.nextInt();
+		sc.nextLine();
+		if(agregarPreguntasCuestionario(cantPreguntas))
+			srvCuestionariosBD.save(objCuestionario);
+	}
+	private boolean agregarPreguntasCuestionario(int cantPreguntas) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'crearCuestionario'");
+		throw new UnsupportedOperationException("Unimplemented method 'agregarPreguntasCuestionario'");
 	}
 
 }
