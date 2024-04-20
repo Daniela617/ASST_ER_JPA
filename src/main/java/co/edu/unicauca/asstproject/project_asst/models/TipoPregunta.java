@@ -8,12 +8,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 //TODO EXTENDS?
 @Setter
 @Getter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="TipoPregunta")
 public class TipoPregunta {
     @Id
