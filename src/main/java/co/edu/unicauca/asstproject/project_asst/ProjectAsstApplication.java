@@ -69,9 +69,10 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	}
 	
 	private void cargarDatos() {
-		TipoPregunta objPrgnta1 = new TipoPregunta(1,"Cultura","Pregutas culturales",null);
-		TipoPregunta objPrgnta2 = new TipoPregunta(2,"Tecnologia","Pregutas tecnologicas",null);
-		TipoPregunta objPrgnta3 = new TipoPregunta(3,"Naturaleza","Pregutas sobre medio ambiente",null);
+		Pregunta objPregunta = new Pregunta();
+		TipoPregunta objPrgnta1 = new TipoPregunta(1,"Cultura","Pregutas culturales",objPregunta);
+		TipoPregunta objPrgnta2 = new TipoPregunta(2,"Tecnologia","Pregutas tecnologicas",objPregunta);
+		TipoPregunta objPrgnta3 = new TipoPregunta(3,"Naturaleza","Pregutas sobre medio ambiente",objPregunta);
 		Departamento objDepto1 = new Departamento(1,"Cauca","Departamento del Cauca");
 		Departamento objDepto2 = new Departamento(2,"Antioquia","Departamento de Antioquia");
 
