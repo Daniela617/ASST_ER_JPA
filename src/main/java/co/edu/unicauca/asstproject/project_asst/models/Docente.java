@@ -36,10 +36,10 @@ public class Docente extends Persona{
     //TODO QUESTION EAGER-    
     //CARGA SE PRODUCE EN EL ACTO
 
-    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "DepartamentosDocentes",
-                joinColumns = @JoinColumn(name = "idp"),
-                inverseJoinColumns = @JoinColumn(name = "idDep"))
+                joinColumns = @JoinColumn(name = "idpersona"),
+                inverseJoinColumns = @JoinColumn(name = "idDepartamento"))
     private List<Departamento> departamentos;
 
     public Docente(){
