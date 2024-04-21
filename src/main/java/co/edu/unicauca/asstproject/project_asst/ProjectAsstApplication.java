@@ -110,26 +110,30 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	private void listarDocentes(){
 		System.out.println("------Listando docentes-------\n");
 		srvDocentesBD.findAll().forEach(docente -> {
-			System.out.printf("Id: %d\n, Nombres: %s\n, Apellidos: %s\n,-----------------\n", docente.getIdpersona(), docente.getNombres(), docente.getApellidos());
+			System.out.printf("Id: %d\n Nombres: %s\n Apellidos: %s\n-----------------\n", docente.getIdpersona(), docente.getNombres(), docente.getApellidos());
+			docente.getDepartamentos().forEach(departamento -> {
+				System.out.printf("Nombre: %d\n", departamento.getNombreDep());
+				
+			});
 		});
 	}
 	private void listarCuestionarios(){
 		System.out.println("---------Listando cuestionarios con preguntas--------------\n");
 		srvCuestionariosBD.findAll().forEach(cuestionario -> {
 			System.out.println("----Cuestionario---\n");
-			System.out.printf("Id: %d\n, Titulo: %s\n, Descripcion: %s\n", cuestionario.getIdCuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
+			System.out.printf("Id: %d\n Titulo: %s\n Descripcion: %s\n", cuestionario.getIdCuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
 			System.out.printf("Preguntas: \n");
 			cuestionario.getPreguntas().forEach(pregunta -> {
 				System.out.printf("Id: %d\n, Enunciado: %s\n", pregunta.getIdpregunta(), pregunta.getEnunciado());
 				System.out.printf("Tipo de Pregunta: \n");
-				System.out.printf("Id: %d\n, Nombre: %s\n, Descripcion: %s\n", pregunta.getObjTipoPregunta().getIdtippregunta(), pregunta.getObjTipoPregunta().getNombre(), pregunta.getObjTipoPregunta().getDescripcion());
+				System.out.printf("Id: %d\n Nombre: %s\n Descripcion: %s\n", pregunta.getObjTipoPregunta().getIdtippregunta(), pregunta.getObjTipoPregunta().getNombre(), pregunta.getObjTipoPregunta().getDescripcion());
 			});
 		});
 	}
 	private void listarTipoPreguntas(){
 		System.out.println("---------Listando tipos de preguntas--------------\n");
 		srvTipoPreguntasBD.findAll().forEach(TipoPregunta -> {
-			System.out.printf("Id: %d\n, Nombre: %s\n, Descripcion: %s\n",TipoPregunta.getIdtippregunta() ,TipoPregunta.getNombre(),TipoPregunta.getDescripcion());
+			System.out.printf("Id: %d\n Nombre: %s\n Descripcion: %s\n",TipoPregunta.getIdtippregunta() ,TipoPregunta.getNombre(),TipoPregunta.getDescripcion());
 		});
 	}
 	private void listarDatosCuestionario() {
@@ -156,7 +160,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	private void listarCuestionariosSinPreguntas() {
 		System.out.println("------Listando cuestionarios-------\n");
 		srvCuestionariosBD.findAll().forEach(cuestionario -> {
-			System.out.printf("Id: %d\n, Titulo: %s\n, Descripcion: %s\n,-----------------\n", cuestionario.getIdCuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
+			System.out.printf("Id: %d\n Titulo: %s\n Descripcion: %s\n-----------------\n", cuestionario.getIdCuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
 		});
 	}
 	private void registrarRespuestasCuestionarioDocente() {
@@ -164,6 +168,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 		System.out.printf("Docentes disponibles: \n");
 		listarDocentes();
 		Docente objDocente = new Docente();
+		//cambiar
 		do {
 			System.out.printf("Digite el id del docente: \n");
 			int idDocente = sc.nextInt();
@@ -177,6 +182,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 		listarCuestionariosSinPreguntas();
 		//a partir del cuestionario listo las preguntas que tiene y obtengo el id de la pregunta para asignarle respuestas
 		Cuestionario objCuestionario = new Cuestionario();
+		//cambiar
 		do {
 			System.out.printf("Digite el id del cuestionario: \n");
 			int idCuestionario = sc.nextInt();
@@ -188,6 +194,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 		//listar preguntas del cuestionario hacer procedimiento
 		listarPreguntasCuestionario(objCuestionario);
 		Pregunta objPregunta = new Pregunta();
+		//cambiar
 		do {
 			System.out.printf("Digite el id de la pregunta: \n");
 			int idPregunta = sc.nextInt();
@@ -223,7 +230,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	
 
 	private void registrarDocente() {
-		System.out.println("--------\nCreando Docente--------");
+		System.out.println("--------Creando Docente--------\n");
 		Docente objDocente = new Docente();
 		System.out.printf("Ingrese el nombre del docente: \n");
 		String nombre = sc.nextLine();
@@ -279,6 +286,8 @@ public class ProjectAsstApplication implements CommandLineRunner{
 			objDocente.getDepartamentos().add(objDepartamento);
 		}
 		srvDocentesBD.save(objDocente);
+		System.out.println("---------Se agregó el docente--------\n");
+		listarDocentes();
 	}
 	private void crearCuestionario() {
 		System.out.println("---------Creando cuestionario--------\n");
@@ -308,6 +317,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 			//listo los tipos de preguntas
 			listarTipoPreguntas();
 			TipoPregunta objTipPregunta = new TipoPregunta();
+			//cambiar
 			do {
 				System.out.printf("Digite el id del tipo de pregunta: \n");
 				int idTipoPregunta = sc.nextInt();

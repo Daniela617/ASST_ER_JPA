@@ -35,7 +35,7 @@ public class Docente extends Persona{
     //TODO QUESTION EAGER-    
     //CARGA SE PRODUCE EN EL ACTO
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "DepartamentosDocentes",
                 joinColumns = @JoinColumn(name = "idpersona"),
                 inverseJoinColumns = @JoinColumn(name = "idDepartamento"))
