@@ -1,6 +1,7 @@
 package co.edu.unicauca.asstproject.project_asst;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -61,19 +62,24 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	@Override 
 	public void run(String... args) throws Exception {
 		cargarDatos();
-		
+		//listarDepartamentos();
 		registrarDocente();
 		crearCuestionario();
 		registrarRespuestasCuestionarioDocente();
 		listarCuestionarios();
 		listarDatosCuestionario();
 	}
+	private void listarDepartamentos(){
+		System.out.println("Departamentos disponibles: ");
+		srvDepartamentosBD.findAll().forEach(departamento -> {System.out.printf("Id: %d, Nombre: %s, descripcion: %s \n",
+        departamento.getIdDepartamento(),departamento.getNombreDep(),departamento.getDescripcion());});
+	}
 	
 	private void cargarDatos() {
-		Pregunta objPregunta = new Pregunta();
-		TipoPregunta objPrgnta1 = new TipoPregunta(1,"Cultura","Pregutas culturales",objPregunta);
-		TipoPregunta objPrgnta2 = new TipoPregunta(2,"Tecnologia","Pregutas tecnologicas",objPregunta);
-		TipoPregunta objPrgnta3 = new TipoPregunta(3,"Naturaleza","Pregutas sobre medio ambiente",objPregunta);
+		System.out.printf("Cargando datos\n");
+		TipoPregunta objPrgnta1 = new TipoPregunta(1,"Cultura","Pregutas culturales",null);
+		TipoPregunta objPrgnta2 = new TipoPregunta(2,"Tecnologia","Pregutas tecnologicas",null);
+		TipoPregunta objPrgnta3 = new TipoPregunta(3,"Naturaleza","Pregutas sobre medio ambiente",null);
 		Departamento objDepto1 = new Departamento(1,"Cauca","Departamento del Cauca");
 		Departamento objDepto2 = new Departamento(2,"Antioquia","Departamento de Antioquia");
 
@@ -255,16 +261,22 @@ public class ProjectAsstApplication implements CommandLineRunner{
 				System.out.printf("La cantidad de departamentos debe ser mayor a cero\n");
 			}
 		} while (cantDepartamentos<=0);
-		//Agrego departamentos
+		listarDepartamentos();
+		
+		//Agrego departamentos - cambiar
 		for (int i = 0; i < cantDepartamentos; i++) {
-			Departamento objDepto = new Departamento();
-			System.out.printf("Ingrese el nombre del departamento: \n");
-			String nombreDepartamento = sc.nextLine();
-			objDepto.setNombreDep(nombreDepartamento);
-			System.out.printf("Ingrese la descripcion del departamento: \n");
-			String descripcionDepartamento = sc.nextLine();
-			objDepto.setDescripcion(descripcionDepartamento);
-			objDocente.getDepartamentos().add(objDepto);
+			Optional<Departamento> departamentoOpcional;
+			Departamento objDepartamento= new Departamento();
+			do {
+				System.out.printf("Ingrese el id del Departamento: \n");
+				int idDep = sc.nextInt();
+				departamentoOpcional = srvDepartamentosBD.findById(idDep);
+				if (!departamentoOpcional.isPresent()) {
+					System.out.printf("El departamento con este id no existe\n");
+				}
+			} while (!departamentoOpcional.isPresent());
+			objDepartamento = departamentoOpcional.get();
+			objDocente.getDepartamentos().add(objDepartamento);
 		}
 		srvDocentesBD.save(objDocente);
 	}

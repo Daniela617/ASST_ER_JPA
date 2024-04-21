@@ -16,7 +16,6 @@ import lombok.Setter;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "Departamentos")
 public class Departamento {
     @Id
@@ -28,5 +27,10 @@ public class Departamento {
 
     @Column(length = 30)
     private String descripcion;
+    public Departamento(){
+        this.idDepartamento = 0;
+        this.nombreDep = "Sin nombre";
+        this.descripcion = "Sin descripcion";
+    }
 
 }
