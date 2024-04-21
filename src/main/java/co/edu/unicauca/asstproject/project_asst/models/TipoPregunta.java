@@ -27,6 +27,7 @@ public class TipoPregunta {
     @OneToOne
     @JoinColumn(name="idPregunta")
     private Pregunta objPregunta;
+    
     public TipoPregunta(){
         this.idtippregunta = 0;
         this.nombre = "Sin nombre";

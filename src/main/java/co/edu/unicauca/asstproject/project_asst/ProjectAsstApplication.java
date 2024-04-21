@@ -72,7 +72,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	private void listarDepartamentos(){
 		System.out.println("Departamentos disponibles: ");
 		srvDepartamentosBD.findAll().forEach(departamento -> {System.out.printf("Id: %d, Nombre: %s, descripcion: %s \n",
-        departamento.getIdDepartamento(),departamento.getNombreDep(),departamento.getDescripcion());});
+        departamento.getIddepartamento(),departamento.getNombredep(),departamento.getDescripcion());});
 	}
 	
 	private void cargarDatos() {
@@ -110,9 +110,9 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	private void listarDocentes(){
 		System.out.println("------Listando docentes-------\n");
 		srvDocentesBD.findAll().forEach(docente -> {
-			System.out.printf("Id: %d\n Nombres: %s\n Apellidos: %s\n-----------------\n", docente.getIdpersona(), docente.getNombres(), docente.getApellidos());
+			System.out.printf(" Nombres: %s\n Apellidos: %s\n-----------------\n", docente.getIdpersona(), docente.getNombres(), docente.getApellidos());
 			docente.getDepartamentos().forEach(departamento -> {
-				System.out.printf("Nombre: %d\n", departamento.getNombreDep());
+				System.out.printf("Nombre: %s\n", departamento.getNombredep());
 				
 			});
 		});
@@ -121,7 +121,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 		System.out.println("---------Listando cuestionarios con preguntas--------------\n");
 		srvCuestionariosBD.findAll().forEach(cuestionario -> {
 			System.out.println("----Cuestionario---\n");
-			System.out.printf("Id: %d\n Titulo: %s\n Descripcion: %s\n", cuestionario.getIdCuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
+			System.out.printf("Id: %d\n Titulo: %s\n Descripcion: %s\n", cuestionario.getIdcuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
 			System.out.printf("Preguntas: \n");
 			cuestionario.getPreguntas().forEach(pregunta -> {
 				System.out.printf("Id: %d\n, Enunciado: %s\n", pregunta.getIdpregunta(), pregunta.getEnunciado());
@@ -145,12 +145,12 @@ public class ProjectAsstApplication implements CommandLineRunner{
 			System.out.printf("Digite el id del cuestionario: \n");
 			int idCuestionario = sc.nextInt();
 			objCuestionario = srvCuestionariosBD.findById(idCuestionario).get();
-			if (objCuestionario.getIdCuestionario()==0) {
+			if (objCuestionario.getIdcuestionario()==0) {
 				System.out.printf("El cuestionario con este id no existe\n");
 			}
-		} while (objCuestionario.getIdCuestionario()==0);
+		} while (objCuestionario.getIdcuestionario()==0);
 
-		System.out.printf("------Listando cuestionario con id: %d-------\n", objCuestionario.getIdCuestionario());
+		System.out.printf("------Listando cuestionario con id: %d-------\n", objCuestionario.getIdcuestionario());
 		System.out.printf("Titulo cuestionario: %s", objCuestionario.getTitulo());
 		System.out.printf("Descripcion cuestionario: %s", objCuestionario.getDescripcion());
 		listarPreguntasCuestionario(objCuestionario); //se listan las preguntas con las respuestas y el docente
@@ -160,7 +160,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	private void listarCuestionariosSinPreguntas() {
 		System.out.println("------Listando cuestionarios-------\n");
 		srvCuestionariosBD.findAll().forEach(cuestionario -> {
-			System.out.printf("Id: %d\n Titulo: %s\n Descripcion: %s\n-----------------\n", cuestionario.getIdCuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
+			System.out.printf("Id: %d\n Titulo: %s\n Descripcion: %s\n-----------------\n", cuestionario.getIdcuestionario(), cuestionario.getTitulo(), cuestionario.getDescripcion());
 		});
 	}
 	private void registrarRespuestasCuestionarioDocente() {
@@ -187,10 +187,10 @@ public class ProjectAsstApplication implements CommandLineRunner{
 			System.out.printf("Digite el id del cuestionario: \n");
 			int idCuestionario = sc.nextInt();
 			objCuestionario = srvCuestionariosBD.findById(idCuestionario).get();
-			if (objCuestionario.getIdCuestionario()==0) {
+			if (objCuestionario.getIdcuestionario()==0) {
 				System.out.printf("El cuestionario con este id no existe\n");
 			}
-		} while (objCuestionario.getIdCuestionario()==0);
+		} while (objCuestionario.getIdcuestionario()==0);
 		//listar preguntas del cuestionario hacer procedimiento
 		listarPreguntasCuestionario(objCuestionario);
 		Pregunta objPregunta = new Pregunta();
@@ -259,6 +259,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 		String tipoTelefono = sc.nextLine();
 		objTelefono.setTipotelefono(tipoTelefono);
 		objDocente.setObjTelefono(objTelefono);
+		objTelefono.setObjDocente(objDocente);
 		int cantDepartamentos = 0;
 		do {
 			System.out.printf("Ingrese el numero de departamentos a registrar: \n");
@@ -272,18 +273,20 @@ public class ProjectAsstApplication implements CommandLineRunner{
 		
 		//Agrego departamentos - cambiar
 		for (int i = 0; i < cantDepartamentos; i++) {
-			Optional<Departamento> departamentoOpcional;
-			Departamento objDepartamento= new Departamento();
-			do {
+			//Optional<Departamento> departamentoOpcional;
+			//Departamento objDepartamento= new Departamento();
+			//do {
 				System.out.printf("Ingrese el id del Departamento: \n");
 				int idDep = sc.nextInt();
-				departamentoOpcional = srvDepartamentosBD.findById(idDep);
-				if (!departamentoOpcional.isPresent()) {
-					System.out.printf("El departamento con este id no existe\n");
-				}
-			} while (!departamentoOpcional.isPresent());
-			objDepartamento = departamentoOpcional.get();
-			objDocente.getDepartamentos().add(objDepartamento);
+				Departamento departamento = srvDepartamentosBD.findById(idDep).get();
+
+				//departamentoOpcional = srvDepartamentosBD.findById(idDep);
+			//	if (!departamentoOpcional.isPresent()) {
+			//7		System.out.printf("El departamento con este id no existe\n");
+				//}
+			//} while (!departamentoOpcional.isPresent());
+		//	objDepartamento = departamentoOpcional.get();
+			objDocente.getDepartamentos().add(departamento);
 		}
 		srvDocentesBD.save(objDocente);
 		System.out.println("---------Se agregó el docente--------\n");

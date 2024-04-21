@@ -31,11 +31,11 @@ public class Respuesta {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "idpersona", nullable = false)
-    private Persona objDocente;
+    @JoinColumn(name = "idDocente", nullable = false)
+    private Docente objDocente;
 
     @OneToOne
-    @JoinColumn(name = "idpregunta", nullable = false)
+    @JoinColumn(name = "idPregunta", nullable = false)
     private Pregunta objPregunta;
 
 }

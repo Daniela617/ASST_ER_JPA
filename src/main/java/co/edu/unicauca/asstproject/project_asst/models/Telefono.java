@@ -36,7 +36,7 @@ public class Telefono {
     private String numero;
 
     @OneToOne
-    @JoinColumn(name = "idpersona")
+    @JoinColumn(name = "idDocente")
     private Docente objDocente;
 
    

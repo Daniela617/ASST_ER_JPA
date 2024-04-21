@@ -9,18 +9,20 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @Table(name = "Personas")
-public abstract class Persona {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idpersona;
+    private Integer idpersona;
 
     @Column(length = 30)
     private String tipoidentificacion;
@@ -40,10 +42,5 @@ public abstract class Persona {
         this.tipoidentificacion = "Sin identificacion";
         this.tipoidentificacion = "Sin tipo";
     }
-    public Persona(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos){
-        this.tipoidentificacion = tipoidentificacion;
-        this.numeroidentificacion = numeroidentificacion;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-    }
+    
 }

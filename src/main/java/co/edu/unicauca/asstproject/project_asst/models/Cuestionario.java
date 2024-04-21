@@ -21,7 +21,7 @@ public class Cuestionario {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCuestionario;
+    private Integer idcuestionario;
     @Column(nullable = false, length = 30)
     private String titulo;
     @Column(nullable = false, length = 30)
@@ -32,13 +32,13 @@ public class Cuestionario {
 
 
     public Cuestionario(){
-        this.idCuestionario = 0;
+        this.idcuestionario = 0;
         this.titulo = "Sin titulo";
         this.descripcion = "Sin descripcion";
         this.preguntas = new ArrayList<Pregunta>();
     }
     public Cuestionario(Integer idCuestionario, String titulo, String descripcion) {
-        this.idCuestionario = idCuestionario;
+        this.idcuestionario = idCuestionario;
         this.titulo = titulo;
         this.descripcion=descripcion;
 

@@ -20,16 +20,16 @@ import lombok.Setter;
 public class Departamento {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idDepartamento;
+	private Integer iddepartamento;
 
     @Column(length = 30)
-    private String nombreDep;
+    private String nombredep;
 
     @Column(length = 30)
     private String descripcion;
     public Departamento(){
-        this.idDepartamento = 0;
-        this.nombreDep = "Sin nombre";
+        this.iddepartamento = 0;
+        this.nombredep = "Sin nombre";
         this.descripcion = "Sin descripcion";
     }
 

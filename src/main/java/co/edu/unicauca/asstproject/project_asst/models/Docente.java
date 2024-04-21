@@ -11,12 +11,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.JoinTable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @Table(name = "Docentes")
 public class Docente extends Persona{
 
@@ -37,8 +40,8 @@ public class Docente extends Persona{
 
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "DepartamentosDocentes",
-                joinColumns = @JoinColumn(name = "idpersona"),
-                inverseJoinColumns = @JoinColumn(name = "idDepartamento"))
+                joinColumns = @JoinColumn(name = "iddocente"),
+                inverseJoinColumns = @JoinColumn(name = "iddepartamento"))
     private List<Departamento> departamentos;
 
     public Docente(){
@@ -46,11 +49,4 @@ public class Docente extends Persona{
         this.departamentos = new ArrayList<Departamento>();
     }
 
-    public Docente (String tipoidentificacion, String numeroidentificacion, 
-        String nombres, String apellidos,String correo, String vinculacion ){
-        super(tipoidentificacion, numeroidentificacion, nombres, apellidos);
-        this.correo = correo;
-        this.vinculacion = vinculacion;
-
-    }
 }
