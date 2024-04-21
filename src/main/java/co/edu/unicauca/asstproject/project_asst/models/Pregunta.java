@@ -35,7 +35,7 @@ public class Pregunta {
     //EAGER: siempre que se consulte una pregunta se cargan sus respuestas
     //CARGA SE PRODUCE EN EL ACTO
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "objPregunta")
-    private List<Respuesta> respuestas;
+    private ArrayList<Respuesta> respuestas;
     //TODO 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objPregunta")
     @JoinColumn(name="idtipopregunta",nullable = false)
@@ -47,6 +47,8 @@ public class Pregunta {
 
     //TODO
     public Pregunta(){
+        this.idpregunta = 0;
+        this.enunciado = "Sin enunciado";
         this.respuestas = new ArrayList<Respuesta>();
     }
 

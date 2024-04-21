@@ -32,7 +32,7 @@ public class Docente extends Persona{
     private Telefono objTelefono;
 
     @OneToMany( mappedBy = "objDocente")
-    private List<Respuesta> respuestas;
+    private ArrayList<Respuesta> respuestas;
 
     //TODO QUESTION EAGER-    
     //CARGA SE PRODUCE EN EL ACTO
@@ -41,7 +41,7 @@ public class Docente extends Persona{
     @JoinTable(name = "Departamentos-Docentes",
                 joinColumns = @JoinColumn(name = "idpersona"),
                 inverseJoinColumns = @JoinColumn(name = "idDepartamento"))
-    private List<Departamento> departamentos;
+    private ArrayList<Departamento> departamentos;
 
     public Docente(){
         this.respuestas = new ArrayList<Respuesta>();

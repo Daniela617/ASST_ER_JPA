@@ -30,10 +30,13 @@ public class Cuestionario {
     private String descripcion;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY, mappedBy = "objCuestionario")
-    private List<Pregunta> preguntas;
+    private ArrayList<Pregunta> preguntas;
 
 
     public Cuestionario(){
+        this.idCuestionario = 0;
+        this.titulo = "Sin titulo";
+        this.descripcion = "Sin descripcion";
         this.preguntas = new ArrayList<Pregunta>();
     }
     public Cuestionario(String titulo, String descripcion, Integer idCuestionario) {

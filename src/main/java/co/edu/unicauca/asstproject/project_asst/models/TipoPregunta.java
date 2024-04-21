@@ -17,7 +17,6 @@ import lombok.Setter;
 @Getter
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name="TipoPregunta")
 public class TipoPregunta {
     @Id
@@ -37,6 +36,12 @@ public class TipoPregunta {
     @OneToOne
     @JoinColumn(name="idPregunta")
     private Pregunta objPregunta;
+    public TipoPregunta(){
+        this.idtippregunta = 0;
+        this.descripcion = "Sin descipcion";
+        this.nombre = "Sin nombre";
+        this.objPregunta = new Pregunta();
+    }
 
    
 

@@ -17,7 +17,6 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Personas")
 public abstract class Persona {
@@ -36,7 +35,13 @@ public abstract class Persona {
 
     @Column(length = 30)
     private String apellidos;
-
+    public Persona(){
+        this.idpersona = 0;
+        this.nombres = "Sin nombre";
+        this.apellidos = "Sin apellido";
+        this.tipoidentificacion = "Sin identificacion";
+        this.tipoidentificacion = "Sin tipo";
+    }
     public Persona(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos){
         this.tipoidentificacion = tipoidentificacion;
         this.numeroidentificacion = numeroidentificacion;
