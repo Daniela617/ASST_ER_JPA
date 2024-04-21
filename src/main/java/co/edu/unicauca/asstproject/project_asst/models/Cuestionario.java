@@ -30,7 +30,7 @@ public class Cuestionario {
     private String descripcion;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY, mappedBy = "objCuestionario")
-    private ArrayList<Pregunta> preguntas;
+    private List<Pregunta> preguntas;
 
 
     public Cuestionario(){
