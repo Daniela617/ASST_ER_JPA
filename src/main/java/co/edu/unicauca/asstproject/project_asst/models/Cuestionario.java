@@ -9,13 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 @Entity
-@PrimaryKeyJoinColumn(name = "IdCuestionario")
 @Getter
 @Setter
 @Table(name = "Cuestionarios") 
@@ -39,7 +37,7 @@ public class Cuestionario {
         this.descripcion = "Sin descripcion";
         this.preguntas = new ArrayList<Pregunta>();
     }
-    public Cuestionario(String titulo, String descripcion, Integer idCuestionario) {
+    public Cuestionario(Integer idCuestionario, String titulo, String descripcion) {
         this.idCuestionario = idCuestionario;
         this.titulo = titulo;
         this.descripcion=descripcion;

@@ -38,7 +38,7 @@ public class Pregunta {
     private List<Respuesta> respuestas;
     //TODO 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objPregunta")
-    @JoinColumn(name="idtipopregunta",nullable = false)
+  //  @JoinColumn(name="idtipopregunta",nullable = false)
     private TipoPregunta objTipoPregunta;
 
     @ManyToOne

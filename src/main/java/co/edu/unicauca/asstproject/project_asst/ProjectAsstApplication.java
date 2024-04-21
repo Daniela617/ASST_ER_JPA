@@ -61,8 +61,9 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	@Override 
 	public void run(String... args) throws Exception {
 		cargarDatos();
-		crearCuestionario();
+		
 		registrarDocente();
+		crearCuestionario();
 		registrarRespuestasCuestionarioDocente();
 		listarCuestionarios();
 		listarDatosCuestionario();

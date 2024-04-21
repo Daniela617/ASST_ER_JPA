@@ -6,7 +6,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinTable;
@@ -27,7 +26,7 @@ public class Docente extends Persona{
     private String vinculacion; 
     
     
-    @OneToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "objDocente")
+    @OneToOne(cascade = {  CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "objDocente")
     private Telefono objTelefono;
 
     @OneToMany( mappedBy = "objDocente")

@@ -8,7 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -16,6 +20,9 @@ import javax.persistence.Column;
 @Setter
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Telefono")
 public class Telefono {
     @Id
@@ -27,16 +34,10 @@ public class Telefono {
 
     @Column(length = 30)
     private String numero;
-    /*TODO */
-    @OneToOne
-    @JoinColumn(name = "idpersona",referencedColumnName = "idpersona")
-    private Persona objDocente;
 
-    public Persona getObjDocente()
-    {
-        return objDocente;
-    }
-    public void setObjDocente(Persona objDocente){
-        this.objDocente=objDocente;
-    }
+    @OneToOne
+    @JoinColumn(name = "idpersona")
+    private Docente objDocente;
+
+   
 }
