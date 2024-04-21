@@ -28,20 +28,19 @@ public class Docente extends Persona{
     
     
     @OneToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy = "objDocente")
-    @PrimaryKeyJoinColumn
     private Telefono objTelefono;
 
     @OneToMany( mappedBy = "objDocente")
-    private ArrayList<Respuesta> respuestas;
+    private List<Respuesta> respuestas;
 
     //TODO QUESTION EAGER-    
     //CARGA SE PRODUCE EN EL ACTO
 
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinTable(name = "Departamentos-Docentes",
-                joinColumns = @JoinColumn(name = "idpersona"),
-                inverseJoinColumns = @JoinColumn(name = "idDepartamento"))
-    private ArrayList<Departamento> departamentos;
+    @JoinTable(name = "DepartamentosDocentes",
+                joinColumns = @JoinColumn(name = "idp"),
+                inverseJoinColumns = @JoinColumn(name = "idDep"))
+    private List<Departamento> departamentos;
 
     public Docente(){
         this.respuestas = new ArrayList<Respuesta>();
@@ -50,7 +49,6 @@ public class Docente extends Persona{
 
     public Docente (String tipoidentificacion, String numeroidentificacion, 
         String nombres, String apellidos,String correo, String vinculacion ){
-
         super(tipoidentificacion, numeroidentificacion, nombres, apellidos);
         this.correo = correo;
         this.vinculacion = vinculacion;

@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//TODO CREO QUE NO ES TABLA
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
@@ -21,7 +20,7 @@ import lombok.Setter;
 @Table(name = "Personas")
 public abstract class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idpersona;
 
     @Column(length = 30)

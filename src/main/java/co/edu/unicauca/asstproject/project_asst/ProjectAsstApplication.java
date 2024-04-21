@@ -71,7 +71,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 	private void cargarDatos() {
 		TipoPregunta objPrgnta1 = new TipoPregunta(1,"Cultura","Pregutas culturales",null);
 		TipoPregunta objPrgnta2 = new TipoPregunta(2,"Tecnologia","Pregutas tecnologicas",null);
-		TipoPregunta objPrgnta3 = new TipoPregunta(2,"Naturaleza","Pregutas sobre medio ambiente",null);
+		TipoPregunta objPrgnta3 = new TipoPregunta(3,"Naturaleza","Pregutas sobre medio ambiente",null);
 		Departamento objDepto1 = new Departamento(1,"Cauca","Departamento del Cauca");
 		Departamento objDepto2 = new Departamento(2,"Antioquia","Departamento de Antioquia");
 
@@ -253,21 +253,18 @@ public class ProjectAsstApplication implements CommandLineRunner{
 				System.out.printf("La cantidad de departamentos debe ser mayor a cero\n");
 			}
 		} while (cantDepartamentos<=0);
-		objDocente.setDepartamentos(agregarDepartamentosDocente(cantDepartamentos, objDocente));
+		//Agrego departamentos
+		for (int i = 0; i < cantDepartamentos; i++) {
+			Departamento objDepto = new Departamento();
+			System.out.printf("Ingrese el nombre del departamento: \n");
+			String nombreDepartamento = sc.nextLine();
+			objDepto.setNombreDep(nombreDepartamento);
+			System.out.printf("Ingrese la descripcion del departamento: \n");
+			String descripcionDepartamento = sc.nextLine();
+			objDepto.setDescripcion(descripcionDepartamento);
+			objDocente.getDepartamentos().add(objDepto);
+		}
 		srvDocentesBD.save(objDocente);
-	}
-	private ArrayList<Departamento> agregarDepartamentosDocente(int cantDepartamentos, Docente objDocente){
-			for (int i = 0; i < cantDepartamentos; i++) {
-				Departamento objDepto = new Departamento();
-				System.out.printf("Ingrese el nombre del departamento: \n");
-				String nombreDepartamento = sc.nextLine();
-				objDepto.setNombreDep(nombreDepartamento);
-				System.out.printf("Ingrese la descripcion del departamento: \n");
-				String descripcionDepartamento = sc.nextLine();
-				objDepto.setDescripcion(descripcionDepartamento);
-				objDocente.getDepartamentos().add(objDepto);
-			}
-			return objDocente.getDepartamentos();
 	}
 	private void crearCuestionario() {
 		System.out.println("---------Creando cuestionario--------\n");
@@ -287,11 +284,7 @@ public class ProjectAsstApplication implements CommandLineRunner{
 				System.out.printf("La cantidad de preguntas debe ser mayor a cero\n");
 			}
 		} while (cantPreguntas<=0);
-
-		objCuestionario.setPreguntas(agregarPreguntasCuestionario(cantPreguntas, objCuestionario));
-		srvCuestionariosBD.save(objCuestionario);
-	}
-	private ArrayList<Pregunta> agregarPreguntasCuestionario(int cantPreguntas, Cuestionario objCuestionario) {
+		//Agrego preguntas
 		for(int i=0; i<cantPreguntas;i++)
 		{
 			Pregunta objPregunta = new Pregunta();
@@ -314,7 +307,9 @@ public class ProjectAsstApplication implements CommandLineRunner{
             objPregunta.setObjCuestionario(objCuestionario);
 			objCuestionario.getPreguntas().add(objPregunta);
 		}	
-		return objCuestionario.getPreguntas();
+
+		srvCuestionariosBD.save(objCuestionario);
 	}
+
 
 }
